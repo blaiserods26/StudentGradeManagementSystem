@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 from accounts.models import User
+from .models import Student
 
 class CustomUserAdmin(UserAdmin):
     list_display = ('identification_number', 'first_name', 'last_name', 'email', 'user_type', 'is_active')
@@ -55,3 +56,13 @@ class CustomUserAdmin(UserAdmin):
 
 # Remove the unregister line and just register your custom admin
 admin.site.register(User, CustomUserAdmin)
+
+@admin.register(Student)
+class StudentAdmin(admin.ModelAdmin):
+    list_display = ('get_full_name', 'current_class', 'date_of_birth', 'created_at')
+    search_fields = ('user__first_name', 'user__last_name', 'user__identification_number')
+    list_filter = ('current_class',)
+
+    def get_full_name(self, obj):
+        return obj.user.get_full_name()
+    get_full_name.short_description = 'Student Name'
