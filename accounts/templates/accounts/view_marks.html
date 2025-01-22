@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Your Marks</h1>
+<div class="marks-container">
+    {% if marks %}
+        <table class="marks-table">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Marks Obtained</th>
+                    <th>Maximum Marks</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for subject, mark in marks.items %}
+                <tr>
+                    <td>{{ subject }}</td>
+                    <td>{{ mark.obtained }}</td>
+                    <td>{{ mark.maximum }}</td>
+                    <td>{{ mark.percentage }}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No marks available yet.</p>
+    {% endif %}
+</div>
+{% endblock %} 

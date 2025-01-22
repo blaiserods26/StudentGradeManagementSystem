@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Create New Student</h1>
+<div class="create-student-form">
+    <form method="POST">
+        {% csrf_token %}
+        <!-- Add your student creation form fields here -->
+        <button type="submit">Create Student</button>
+    </form>
+</div>
+{% endblock %} 

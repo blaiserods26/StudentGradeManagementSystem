@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Student Dashboard</h1>
+<div class="student-dashboard">
+    <div class="student-info">
+        <h2>Personal Information</h2>
+        {% if student_info %}
+            <!-- Add student information display here -->
+            <p>Name: {{ student_info.name }}</p>
+            <p>Roll Number: {{ student_info.roll_number }}</p>
+        {% else %}
+            <p>No information available.</p>
+        {% endif %}
+    </div>
+
+    <div class="student-marks">
+        <h2>Academic Performance</h2>
+        {% if student_info.marks %}
+            <!-- Add marks display here -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Marks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for subject, mark in student_info.marks.items %}
+                    <tr>
+                        <td>{{ subject }}</td>
+                        <td>{{ mark }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No marks available.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %} 

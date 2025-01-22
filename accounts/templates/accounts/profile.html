@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Profile</h1>
+<div class="profile-container">
+    <div class="profile-info">
+        <h2>Personal Information</h2>
+        <div class="info-group">
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Full Name:</strong> {{ user.get_full_name }}</p>
+            {% if user.is_student %}
+                <p><strong>Roll Number:</strong> {{ user.roll_number }}</p>
+                <p><strong>Class:</strong> {{ user.class_name }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="profile-actions">
+        <h2>Actions</h2>
+        <a href="#" class="btn btn-primary">Edit Profile</a>
+        <a href="#" class="btn btn-secondary">Change Password</a>
+    </div>
+</div>
+{% endblock %} 
