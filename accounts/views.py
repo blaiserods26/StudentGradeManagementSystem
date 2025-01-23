@@ -45,10 +45,19 @@ def student_dashboard(request):
     student_info = {}  # Replace with actual student data query
     return render(request, 'accounts/student_dashboard.html', {'student_info': student_info})
 
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from management.models import StudentMarks
+
 @login_required
 def view_marks(request):
-    # Add logic to fetch student's marks
-    student_marks = {}  # Replace with actual marks query
+    # Fetch the current user’s identification number
+    user = request.user
+    identification_number = user.identification_number  # Assuming identification_number is an attribute of the User model
+
+    # Get the student's marks using their identification_number
+    student_marks = StudentMarks.objects.filter(student_id=identification_number)
+
     return render(request, 'accounts/view_marks.html', {'marks': student_marks})
 
 @login_required

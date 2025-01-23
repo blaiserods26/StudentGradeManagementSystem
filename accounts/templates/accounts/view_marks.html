@@ -14,13 +14,43 @@
                 </tr>
             </thead>
             <tbody>
-                {% for subject, mark in marks.items %}
-                <tr>
-                    <td>{{ subject }}</td>
-                    <td>{{ mark.obtained }}</td>
-                    <td>{{ mark.maximum }}</td>
-                    <td>{{ mark.percentage }}%</td>
-                </tr>
+                {% for mark in marks %}
+                    <tr>
+                        <td>Java</td>
+                        <td>{{ mark.java }}</td>
+                        <td>100</td>  <!-- Assuming maximum marks are 100 for each subject -->
+                        <td>{{ mark.java|floatformat:2 }}%</td>  <!-- Calculate percentage if needed -->
+                    </tr>
+                    <tr>
+                        <td>Python</td>
+                        <td>{{ mark.python }}</td>
+                        <td>100</td>
+                        <td>{{ mark.python|floatformat:2 }}%</td>
+                    </tr>
+                    <tr>
+                        <td>DBMS</td>
+                        <td>{{ mark.dbms }}</td>
+                        <td>100</td>
+                        <td>{{ mark.dbms|floatformat:2 }}%</td>
+                    </tr>
+                    <tr>
+                        <td>Data Science</td>
+                        <td>{{ mark.data_science }}</td>
+                        <td>100</td>
+                        <td>{{ mark.data_science|floatformat:2 }}%</td>
+                    </tr>
+                    <tr>
+                        <td>AOA</td>
+                        <td>{{ mark.aoa }}</td>
+                        <td>100</td>
+                        <td>{{ mark.aoa|floatformat:2 }}%</td>
+                    </tr>
+                    <tr>
+                        <td>IKS</td>
+                        <td>{{ mark.iks }}</td>
+                        <td>100</td>
+                        <td>{{ mark.iks|floatformat:2 }}%</td>
+                    </tr>
                 {% endfor %}
             </tbody>
         </table>
@@ -28,4 +58,4 @@
         <p>No marks available yet.</p>
     {% endif %}
 </div>
-{% endblock %} 
+{% endblock %}

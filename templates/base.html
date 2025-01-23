@@ -276,11 +276,12 @@
                 <a href="{% url 'management:create_student' %}">Create Student</a>
                 <a href="{% url 'management:view_students' %}">View Students</a>
                 <a href="{% url 'management:add_marks' %}">Add Marks</a>
+                <a href="{% url 'accounts:profile' %}">Profile</a>
             {% else %}
-                <a href="{% url 'accounts:student_dashboard' %}">Dashboard</a>
+                <a href="{% url 'accounts:profile' %}">Profile</a>
                 <a href="{% url 'accounts:view_marks' %}">View Marks</a>
             {% endif %}
-            <a href="{% url 'accounts:profile' %}">Profile</a>
+            
             <a href="{% url 'accounts:logout' %}">Logout</a>
         {% endif %}
     </div>
