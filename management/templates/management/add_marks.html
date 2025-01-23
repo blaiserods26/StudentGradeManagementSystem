@@ -5,8 +5,11 @@
 <div class="add-marks-form">
     <form method="POST">
         {% csrf_token %}
-        <!-- Add your marks submission form fields here -->
+        {{ form.as_p }}  <!-- This will render the student_id dropdown along with other fields -->
         <button type="submit">Submit Marks</button>
     </form>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>  <!-- Display any error message -->
+    {% endif %}
 </div>
-{% endblock %} 
+{% endblock %}

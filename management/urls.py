@@ -8,4 +8,5 @@ urlpatterns = [
     path('create-student/', views.create_student, name='create_student'),
     path('add-marks/', views.add_marks, name='add_marks'),
     path('view-students/', views.view_students, name='view_students'),
-] 
+    path('success/', views.success_page, name='success'),  # This is the success page URL
+]

@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import StudentCreationForm
 from accounts.models import User
-from .models import Student
+from .models import Student, StudentMarks
 
 def is_management_user(user):
     return user.is_authenticated and user.user_type == User.MANAGEMENT
@@ -42,13 +42,35 @@ def create_student(request):
 def dashboard(request):
     return render(request, 'management/dashboard.html')
 
-@login_required
-@user_passes_test(is_management_user)
-def add_marks(request):
-    return render(request, 'management/add_marks.html')
+ # Ensure only staff can add marks
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required, user_passes_test
+from .forms import StudentMarksForm
+from .models import StudentMarks
 
 @login_required
-@user_passes_test(is_management_user)
+@user_passes_test(lambda u: u.is_staff)  # Ensure only staff can add marks
+def add_marks(request):
+    if request.method == 'POST':
+        form = StudentMarksForm(request.POST)
+        if form.is_valid():
+            form.save()  # Save the form data into the database
+            return redirect('management:success')  # Redirect to a success page after submission
+        else:
+            return render(request, 'management/add_marks.html', {'form': form, 'error': 'All fields are required.'})
+
+    else:
+        form = StudentMarksForm()  # Initialize an empty form for GET requests
+    return render(request, 'management/add_marks.html', {'form': form})
+
+def success_page(request):
+    return render(request, 'management/success.html')
+
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def view_students(request):
     students = Student.objects.all()
+    print(students)
     return render(request, 'management/view_students.html', {'students': students})
+
+

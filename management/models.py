@@ -15,3 +15,15 @@ class Student(models.Model):
 
     class Meta:
         ordering = ['user__first_name', 'user__last_name']
+
+class StudentMarks(models.Model):
+    student_id = models.CharField(max_length=20)
+    java = models.IntegerField()
+    python = models.IntegerField()
+    dbms = models.IntegerField()
+    data_science = models.IntegerField()
+    aoa = models.IntegerField()
+    iks = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.student_id} Marks"

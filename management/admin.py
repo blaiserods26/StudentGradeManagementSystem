@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 from accounts.models import User
-from .models import Student
+from .models import Student, StudentMarks
 
 class CustomUserAdmin(UserAdmin):
     list_display = ('identification_number', 'first_name', 'last_name', 'email', 'user_type', 'is_active')
@@ -54,7 +54,7 @@ class CustomUserAdmin(UserAdmin):
                 
         super().save_model(request, obj, form, change)
 
-# Remove the unregister line and just register your custom admin
+# Registering the Custom User Admin
 admin.site.register(User, CustomUserAdmin)
 
 @admin.register(Student)
@@ -66,3 +66,6 @@ class StudentAdmin(admin.ModelAdmin):
     def get_full_name(self, obj):
         return obj.user.get_full_name()
     get_full_name.short_description = 'Student Name'
+
+# StudentMarks doesn't need a custom admin class unless you want to modify its display
+admin.site.register(StudentMarks)
